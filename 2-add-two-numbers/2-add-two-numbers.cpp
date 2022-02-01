@@ -11,57 +11,27 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* head = new ListNode(-1);
-        ListNode* ptr = head;
-        
+        ListNode* head = new ListNode(); 
+        ListNode* temp = head; 
         int carry = 0;
-        while(l1 && l2) {
-            int add = l1->val + l2->val + carry;
-            if(add > 9) {
-                carry = 1;
-                add = add - 10;
-            } 
-            else
-                carry = 0;
-            ptr->next = new ListNode(add);
-            l1 = l1->next;
-            l2 = l2->next;
-            ptr = ptr->next;
-        }
-        if(l1) {
-            while(l1) { 
-                int add = l1->val + carry;
-                if(add > 9) {
-                    carry = 1;
-                    add = add - 10;
-                } 
-                else
-                    carry = 0;
-
-                ptr->next = new ListNode(add);
-                l1 = l1->next;
-                ptr = ptr->next;
-            }
-        }
-        else if(l2) {
-            while(l2) { 
-                int add = l2->val + carry;
-                if(add > 9) {
-                    carry = 1;
-                    add = add - 10;
-                } 
-                else
-                    carry = 0;
-
-                ptr->next = new ListNode(add);
-                l2 = l2->next;
-                ptr = ptr->next;
-            }
-        }
         
-        if(carry) 
-            ptr->next = new ListNode(carry);
-        
-        return head->next;
+        while( (l1 != NULL || l2 != NULL) || carry) {
+            int sum = 0; 
+            if(l1 != NULL) {
+                sum += l1->val; 
+                l1 = l1->next; 
+            }
+            
+            if(l2 != NULL) {
+                sum += l2->val; 
+                l2 = l2->next; 
+            }
+            
+            sum += carry; 
+            carry = sum/10;  
+            temp->next = new ListNode(sum % 10);
+            temp = temp->next; 
+        }
+        return head->next; 
     }
 };

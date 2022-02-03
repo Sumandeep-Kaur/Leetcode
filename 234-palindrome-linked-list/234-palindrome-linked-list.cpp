@@ -11,32 +11,37 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        ListNode* ptr = head;
-        int len = 0;
-        while(ptr != NULL) {
-            len++;
-            ptr = ptr->next;
+        if(head == NULL || head->next == NULL)
+            return true;
+        
+        // Find middle element(slow)
+        ListNode* slow = head, *fast = head;
+        while(fast->next != NULL && fast->next->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
         
-        ptr = head;
-        stack<int> st;
-        for(int i = 0; i < len/2; i++) {
-            st.push(ptr->val);
-            ptr = ptr->next;
+        // Reverse Linked list from the middle-element(slow) to end
+        ListNode* prev = NULL;
+        ListNode* curr = slow->next;
+        ListNode* next = NULL;
+        while(curr != NULL) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
         }
+        slow = prev;
         
-        if(len % 2 == 1)
-            ptr = ptr->next;
-        
-        for(int i = 0; i < len/2; i++) {
-            if(st.top() != ptr->val)
+        // Compare Linked-list iterating from start and middle
+        ListNode* p1 = head;
+        ListNode* p2 = slow;
+        while(p2 != NULL) {
+            if(p1->val != p2->val)
                 return false;
-            else {
-                st.pop();
-                ptr = ptr->next;
-            }
+            p1 = p1->next;
+            p2 = p2->next;
         }
-        
         return true;
     }
 };

@@ -5,19 +5,27 @@ public:
         if(n == 0 || n == 1 || n == 2)
             return 0;
         
-        int left[n];
-        left[0] = height[0];
-        for(int i = 1; i < n; i++)
-            left[i] = max(left[i-1], height[i]);
+        int left = 0, right = n - 1;
+        int maxLeft = 0, maxRight = 0, waterTrapped = 0;
         
-        int right[n];
-        right[n-1] = height[n-1];
-        for(int i = n - 2; i >= 0; i--)
-            right[i] = max(right[i+1], height[i]);
-        
-        int waterTrapped = 0;
-        for(int i = 0; i < n; i++)
-            waterTrapped += min(left[i], right[i]) - height[i];
+        while(left < right) {
+            if(height[left] <= height[right]) {
+                if(maxLeft <= height[left])
+                    maxLeft = height[left];
+                else
+                    waterTrapped += maxLeft - height[left];
+                
+                left++;
+            }
+            else {
+                if(maxRight <= height[right])
+                    maxRight = height[right];
+                else
+                    waterTrapped += maxRight - height[right];
+                
+                right--;
+            }
+        }
         
         return waterTrapped;
     }

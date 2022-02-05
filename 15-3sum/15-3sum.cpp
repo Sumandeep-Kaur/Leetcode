@@ -15,11 +15,14 @@ public:
                     v.push_back(nums[end]);
                     res.push_back(v);
                     
-                    while(start < end && nums[start] == v[1])
+                    while(start < end && nums[start] == nums[start+1])
                         start++;
                     
-                    while(start < end && nums[end] == v[2])
+                    while(start < end && nums[end] == nums[end-1])
                         end--;
+                    
+                    start++;
+                    end--;
                 }
                 else if(nums[start] + nums[end] > -nums[i]) 
                     end--;

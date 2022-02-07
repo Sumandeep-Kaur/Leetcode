@@ -1,10 +1,20 @@
-// { Driver Code Starts
+/*
+Time Complexity: O(N)
+Space Complexity: O(N)
+
+Approach:
+
+Initialise vector of two quantities: the starting time, ending time. Sort this data structure in ascending order of end time. 
+Initially, the answer is 1 because the first meeting can always be performed. Make another variable, say limit that keeps track of the ending time of the meeting that was last performed. 
+Initially set limit as the end time of the first meeting.
+
+Start iterating from the second meeting. At every position we have two possibilities:-
+1. If the start time of a meeting is strictly greater than limit we can perform the meeting. Update the answer and limit as ending time of the current meeting. 
+1. If the start time is less than or equal to limit skip and move ahead.
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
-
- // } Driver Code Ends
-
-#include<vector>
 
 class Solution {
     public:

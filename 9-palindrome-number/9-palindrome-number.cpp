@@ -1,24 +1,16 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        if(x < 0) 
+        if(num < 0 || (num % 10 == 0 && num != 0))
             return false;
         
-        vector<int> v;
-        while(x) {
-            int r = x % 10;
-            x /= 10;
-            v.push_back(r);
+        int reversed = 0;
+        while(num > reversed) {
+            int rem = num % 10;
+            reversed = reversed * 10 + rem;
+            num /= 10;
         }
         
-        if(v.size() == 1)
-            return true;
-        
-        int low = 0, high = v.size() - 1;
-        while(low < high) {
-            if(v[low++] != v[high--])
-                return false;
-        }
-        return true;
+        return (num == reversed || num == reversed/10);
     }
 };

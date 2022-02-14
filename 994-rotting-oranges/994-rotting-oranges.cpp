@@ -1,13 +1,13 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {        
-        int totalOranges = 0, rottenOranges = 0, time = 0;
+        int freshOranges = 0, rottenOranges = 0, time = 0;
         queue<pair<int, int>> q;
         
         for(int i = 0; i < grid.size(); i++) {
             for(int j = 0; j < grid[0].size(); j++) {
-                if(grid[i][j] != 0)
-                    totalOranges++;
+                if(grid[i][j] == 1)
+                    freshOranges++;
                 if(grid[i][j] == 2)
                     q.push({i, j});
             }
@@ -18,25 +18,25 @@ public:
         
         while(!q.empty()) {
             int n = q.size();
-            rottenOranges += n;
             while(n--) {
                 int x = q.front().first, y = q.front().second;
                 q.pop();
                 for(int i = 0; i < 4; ++i){
                     int nx = x + dx[i], ny = y + dy[i];
-                    if(nx < 0 || ny < 0 || nx >= grid.size() || ny >= grid[0].size() || grid[nx][ny] != 1)
-                        continue;
-                    grid[nx][ny] = 2;
-                    q.push({nx, ny});
+                    if(nx >= 0 && nx < grid.size() && ny >= 0 && ny < grid[0].size() && grid[nx][ny] == 1) {
+                        grid[nx][ny] = 2;
+                        q.push({nx, ny});
+                        freshOranges--;
+                    }
                 }
             }
             if(!q.empty())
                 time++;
         }
         
-        if(totalOranges == rottenOranges)
-            return time;
-        else
+        if(freshOranges > 0)
             return -1;
+        else
+            return time;
     }
 };

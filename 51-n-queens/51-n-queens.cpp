@@ -24,23 +24,20 @@ public:
             ans.push_back(board);
             return;
         }
-        for(int i = 0; i < n; i++) {
-            if(isSafe(n, row, i, board)) {
-                board[row][i] = 'Q';
+        for(int col = 0; col < n; col++) {
+            if(isSafe(n, row, col, board)) {
+                board[row][col] = 'Q';
                 solve(n, row + 1, board, ans);
-                board[row][i] = '.';
+                board[row][col] = '.';
             }
         }
     }
     
     vector<vector<string>> solveNQueens(int n) {
-        int t = n;
-        string s = "";
-        while(t--)
-            s += '.';
-        
         vector<vector<string>> ans;
         vector<string> board;
+        
+        string s(n, '.');
         for(int i = 0; i < n; i++)
             board.push_back(s);
         

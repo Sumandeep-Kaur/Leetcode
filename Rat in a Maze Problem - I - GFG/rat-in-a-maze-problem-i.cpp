@@ -10,38 +10,9 @@ using namespace std;
 
 class Solution{
     public:
-    // void solve(vector<vector<int>>& matrix, int n, int row, int col, string s, vector<string>& ans, vector<vector<int>>& vis) {
-    //     if(row == n - 1 && col == n - 1) {
-    //         ans.push_back(s);
-    //         return;
-    //     }
-    //     //Down
-    //     if (row + 1 < n && vis[row + 1][col] == 0 && matrix[row + 1][col] == 1) {
-    //         vis[row][col] = 1;
-    //         solve(matrix, n, row + 1, col, s + 'D', ans, vis);
-    //         vis[row][col] = 0;
-    //     }
-    //     //Left
-    //     if (col - 1 >= 0 && vis[row][col - 1] == 0 && matrix[row][col - 1] == 1) {
-    //         vis[row][col] = 1;
-    //         solve(matrix, n, row, col - 1, s + 'L', ans, vis);
-    //         vis[row][col] = 0;
-    //     }
-    //     //Right
-    //     if (col + 1 < n && vis[row][col + 1] == 0 && matrix[row][col + 1] == 1) {
-    //         vis[row][col] = 1;
-    //         solve(matrix, n, row, col + 1, s + 'R', ans, vis);
-    //         vis[row][col] = 0;
-    //     }
-    //     //Up
-    //     if (row - 1 >= 0 && vis[row - 1][col] == 0 && matrix[row - 1][col] == 1) {
-    //         vis[row][col] = 1;
-    //         solve(matrix, n, row - 1, col, s + 'U', ans, vis);
-    //         vis[row][col] = 0;
-    //     }
-    // }
-    
-    void solve(vector<vector<int>>& matrix, int n, int row, int col, string s, vector<string>& ans) {
+
+    void solve(vector<vector<int>>& matrix, int n, int row, int col, string s, vector<string>& ans) 
+    {
         if(row == n - 1 && col == n - 1) {
             ans.push_back(s);
             return;

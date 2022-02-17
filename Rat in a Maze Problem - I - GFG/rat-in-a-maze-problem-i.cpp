@@ -17,6 +17,18 @@ class Solution{
             ans.push_back(s);
             return;
         }
+        int drow[] = {1, 0, 0, -1};
+        int dcol[] = {0, -1, 1, 0};
+        string dir = "DLRU";
+        for(int i = 0; i < 4; i++) {
+            int nextRow = row + drow[i], nextCol = col + dcol[i];
+            if(nextRow >= 0 && nextRow < n && nextCol >= 0 && nextCol < n && matrix[nextRow][nextCol] == 1) {
+                matrix[row][col] = 2;
+                solve(matrix, n, nextRow, nextCol, s + dir[i], ans);
+                matrix[row][col] = 1;
+            }
+        }
+        /*
         //Down
         if (row + 1 < n && matrix[row + 1][col] == 1) {
             matrix[row][col] = 2;
@@ -41,6 +53,7 @@ class Solution{
             solve(matrix, n, row - 1, col, s + 'U', ans);
             matrix[row][col] = 1;
         }
+        */
     }
     
     vector<string> findPath(vector<vector<int>>& matrix, int n) {

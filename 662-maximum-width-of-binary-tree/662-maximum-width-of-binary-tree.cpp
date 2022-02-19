@@ -25,9 +25,9 @@ public:
                 long k = q.front().second;
                 q.pop();
                 
-                if(temp->left)
+                if(temp->left != NULL)
                     q.push({temp->left, k*2 + 1});
-                if(temp->right)
+                if(temp->right != NULL)
                     q.push({temp->right, k*2 + 2});
                 
                 if(i == 0)

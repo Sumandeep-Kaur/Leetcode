@@ -34,9 +34,7 @@ public:
                 if(node->right != NULL)
                     q.push(node->right);
                 
-                if(i == n - 1)
-                    node->next = NULL;
-                else
+                if(i != n - 1)
                     node->next = q.front();
             }
         }

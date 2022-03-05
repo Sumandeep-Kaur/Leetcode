@@ -9,13 +9,14 @@ public:
             maxNum = max(maxNum, i);
         }
         
-        vector<int> maxPoints(maxNum + 1, 0);
-        maxPoints[1] = mp[1];
+        int twoBack = 0, oneBack = mp[1];
         
         for(int i = 2; i <= maxNum; i++) {
-            maxPoints[i] = max(maxPoints[i-1], maxPoints[i-2] + mp[i]);
+            int gain = max(oneBack, twoBack + mp[i]);
+            twoBack = oneBack;
+            oneBack = gain;
         }
         
-        return maxPoints[maxNum];
+        return oneBack;
     }
 };

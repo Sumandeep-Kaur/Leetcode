@@ -18,7 +18,7 @@ public:
         if(mp[root] != 0)
             return mp[root];
         
-        int lootWithRoot = 0;
+        int lootWithRoot = root->val;
         if(root->left != NULL) 
             lootWithRoot += robHouse(root->left->left, mp) + robHouse(root->left->right, mp);
         
@@ -27,7 +27,7 @@ public:
         
         int lootWithoutRoot = robHouse(root->left, mp) + robHouse(root->right, mp);
         
-        mp[root] = max(root->val + lootWithRoot, lootWithoutRoot);
+        mp[root] = max(lootWithRoot, lootWithoutRoot);
         return mp[root];
     }
     

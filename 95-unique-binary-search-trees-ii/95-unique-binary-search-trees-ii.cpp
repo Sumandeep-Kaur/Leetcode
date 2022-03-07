@@ -18,11 +18,11 @@ public:
             ans.push_back(NULL);
         }
 
-        for(int i = start; i <= end; i++) {
+        for(int i = start; i <= end; ++i) {
             vector<TreeNode*> leftList = buildTree(start, i - 1);
             vector<TreeNode*> rightList = buildTree(i + 1, end);
-            for (TreeNode* leftNode : leftList) {
-                for(TreeNode* rightNode : rightList) {
+            for(auto leftNode : leftList) {
+                for(auto rightNode : rightList) {
                     TreeNode* root = new TreeNode(i);
                     root->left = leftNode;
                     root->right = rightNode;

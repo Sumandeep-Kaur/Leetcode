@@ -5,11 +5,9 @@ public:
         int j = 0;
         for(int i = 0; i < pushed.size(); i++) {
             st.push(pushed[i]);
-            if(!st.empty() && popped[j] == st.top()) {
-                while(!st.empty() && popped[j] == st.top()) { 
-                    st.pop();
-                    j++;
-                }
+            while(!st.empty() && popped[j] == st.top()) { 
+                st.pop();
+                j++;
             }
         }
         

@@ -1,26 +1,19 @@
 class Solution {
 public:
-    bool isValid(int row, int col, char c, vector<vector<char>>& board) {
-      for(int i = 0; i < 9; i++) {
-        if (board[i][col] == c && i != row)
-          return false;
-
-        if (board[row][i] == c && i != col)
-          return false;
-
-        if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c && (3* (row / 3) + i / 3) != row && ( 3 * (col / 3) + i % 3) != col)
-          return false;
-      }
-      return true;
-    }
-
     bool isValidSudoku(vector<vector<char>>& board) {
-        for(int i = 0; i < 9; i++) {
-            for(int j = 0; j < 9; j++) {
-                if(board[i][j] != '.' && !isValid(i, j, board[i][j], board))
-                    return false;
+        int rows[9][9] = {0}; //rows[5][0] means whether number 1('0'+1) in row 5 has appeared.
+        int cols[9][9] = {0}; //cols[3][8] means whether number 9('8'+1) in col 3 has appeared.
+        int blocks[3][3][9] = {0}; //blocks[0][2][5] means whether number '6' in block 0,2 (row 0~2,col 6~8) has appeared.
+        for(int r = 0; r < 9; r++) {    
+            for(int c = 0; c < 9; c++) { 
+                if(board[r][c] != '.') {   //skip all number '.'
+                    int num = board[r][c] - '1'; //calculate the number's index(board's number minus 1)
+                    if(rows[r][num]++ || cols[c][num]++ || blocks[r/3][c/3][num]++) 
+                        return false; //if the number has already appeared once, return false.
+                }
             }
         }
-        return true;
+        
+        return true;;
     }
 };

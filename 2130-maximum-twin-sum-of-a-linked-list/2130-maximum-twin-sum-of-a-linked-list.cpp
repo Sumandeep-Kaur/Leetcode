@@ -27,8 +27,7 @@ public:
             prev = curr;
             curr = next;
         }
-        slow->next = prev;
-        slow = slow->next;
+        slow = prev;
         
         int maxSum = INT_MIN;
         while(slow != NULL) {

@@ -12,14 +12,14 @@
 class Solution {
 public:
     void countLeaf(TreeNode* root, vector<int>& v) {
+        if(root == NULL)
+            return;
         if(root->left == NULL && root->right == NULL) {
             v.push_back(root->val);
             return;
-        } 
-        if(root->left != NULL)
-            countLeaf(root->left, v);
-        if(root->right != NULL)
-            countLeaf(root->right, v);
+        }
+        countLeaf(root->left, v);
+        countLeaf(root->right, v);
     }
     
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
@@ -27,9 +27,6 @@ public:
         countLeaf(root1, l1);
         countLeaf(root2, l2);
         
-        if(l1 == l2)
-            return true;
-        else
-            return false;
+        return l1 == l2;
     }
 };

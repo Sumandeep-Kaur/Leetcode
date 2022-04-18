@@ -11,18 +11,22 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root, set<int>& v) {
+    int min1;
+    long min2 = LONG_MAX;
+    void dfs(TreeNode* root) {
         if(root == NULL)
             return;
-        v.insert(root->val);
-        dfs(root->left, v);
-        dfs(root->right, v);
+        if(min1 < root->val && root->val < min2) { 
+            min2 = root->val;
+        }
+        else if(min1 == root->val) {
+            dfs(root->left);
+            dfs(root->right);
+        }
     }
     int findSecondMinimumValue(TreeNode* root) {
-        set<int> nums;
-        dfs(root, nums);
-        if(nums.size() <= 1)
-            return -1;
-        return *next(nums.begin(), 1);
+        min1 = root->val;
+        dfs(root);
+        return min2 == LONG_MAX ? -1 : (int) min2;
     }
 };

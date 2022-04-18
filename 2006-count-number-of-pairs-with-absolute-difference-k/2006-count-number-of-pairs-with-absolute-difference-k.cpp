@@ -2,12 +2,12 @@ class Solution {
 public:
     int countKDifference(vector<int>& nums, int k) {
         int pairs = 0;
-        for(int i = 0; i < nums.size() - 1; i++) {
-            for(int j = i + 1; j < nums.size(); j++) {
-                if(abs(nums[i] - nums[j]) == k)
-                    pairs++;
-            }
-        }  
+        unordered_map<int, int> mp;
+        for(int num : nums) {
+            pairs += mp[num + k] + mp[num - k];
+            mp[num]++;
+        }
+        
         return pairs;
     }
 };

@@ -28,10 +28,6 @@ public:
     TreeNode* listToBST(ListNode* head, ListNode* tail) {
         if(head == tail)
             return NULL;
-        if(head->next == tail) {
-            TreeNode* root = new TreeNode(head->val);
-            return root;
-        }
         
         ListNode* slow = head, *fast = head;
         while(fast != tail && fast->next != tail) {

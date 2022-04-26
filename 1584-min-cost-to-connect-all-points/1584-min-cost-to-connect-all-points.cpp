@@ -1,10 +1,10 @@
 class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
-        int n = points.size(), edgesRequired = n - 1, minCost = 0, i = 0;
+        int n = points.size(), edgesUsed = 0, minCost = 0, i = 0;
         vector<bool> visited(n, 0);
         priority_queue<pair<int, int>> pq;
-        while(edgesRequired-- > 0) {
+        while(++edgesUsed < n) {
             visited[i] = true;
             for(int j = 0; j < n; j++) {
                 if(visited[j] == 0) {
